@@ -29,7 +29,7 @@ app.post("/api/alert", async (req, res) => {
         "https://wa-gateway.bukansarjanakomputer.web.id/message/send-text",
         {
           params: {
-            session: "mysession",
+            session: "trial01@email.com",
             to: "6285707947308",
             text: text,
           },
