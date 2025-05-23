@@ -14,11 +14,15 @@ app.post("/api/alert", async (req, res) => {
   console.log("Received alerts:");
 
   for (const alert of data.alerts) {
+    const time = new Date(alert.startsAt).toLocaleString("en-US", {
+      timeZone: "Asia/Jakarta",
+    });
+
     const status = alert.status;
     const alertname = alert.labels.alertname;
     const instance = alert.labels.instance;
     const summary = alert.annotations.summary || "(no summary)";
-    const startsAt = alert.startsAt;
+    const startsAt = time;
 
     const text = `🚨 *[${status.toUpperCase()}]* ${alertname} di ${instance}\n📝 ${summary}\n🕒 Mulai: ${startsAt}`;
 
