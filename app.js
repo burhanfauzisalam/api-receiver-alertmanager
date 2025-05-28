@@ -18,13 +18,19 @@ app.post("/api/alert", async (req, res) => {
       timeZone: "Asia/Jakarta",
     });
 
+    const time1 = new Date(alert.endsAt).toLocaleString("en-US", {
+      timeZone: "Asia/Jakarta",
+    });
+
     const status = alert.status;
     const alertname = alert.labels.alertname;
     const instance = alert.labels.instance;
     const summary = alert.annotations.summary || "(no summary)";
     const startsAt = time;
+    const endsAt = time1;
 
-    const text = `🚨 *[${status.toUpperCase()}]* ${alertname} di ${instance}\n📝 ${summary}\n🕒 Mulai: ${startsAt}`;
+    const text = `🚨 *[${status.toUpperCase()}]*\n${alertname} in ${instance}\n📝 ${summary}\n🕒 At: ${startsAt}`;
+    const text1 = `🟢 *[${status.toUpperCase()}]*\n${alertname} in ${instance}\n📝 has returned to normal.\n🕒 At: ${endsAt}`;
 
     console.log(text);
 
@@ -35,7 +41,7 @@ app.post("/api/alert", async (req, res) => {
           params: {
             session: "trial01@email.com",
             to: "6285707947308",
-            text: text,
+            text: status.toUpperCase() == "FIRING" ? text : text1,
           },
         }
       );
