@@ -1,0 +1,34 @@
+{
+  "version": "4",
+  "groupKey": "alertname=HighCPUUsage",
+  "status": "resolved",
+  "receiver": "webhook",
+  "groupLabels": {
+    "alertname": "HighCPUUsage"
+  },
+  "commonLabels": {
+    "alertname": "HighCPUUsage",
+    "instance": "server1.example.com",
+    "severity": "critical"
+  },
+  "commonAnnotations": {
+    "summary": "CPU usage is above 90% on server1"
+  },
+  "externalURL": "http://alertmanager.example.com",
+  "alerts": [
+    {
+      "status": "resolved",
+      "labels": {
+        "alertname": "HighCPUUsage",
+        "instance": "server1.example.com",
+        "severity": "critical"
+      },
+      "annotations": {
+        "summary": "CPU usage is above 90% on server1"
+      },
+      "startsAt": "2025-05-28T10:00:00Z",
+      "endsAt": "2025-05-28T10:05:00Z",
+      "generatorURL": "http://prometheus.example.com/graph?g0.expr=cpu_usage+%3E+90"
+    }
+  ]
+}
